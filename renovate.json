@@ -1,0 +1,26 @@
+"customManagers": [
+        {
+            "customType": "regex",
+            "description": "Update tool versions in variables.*.pkrvars.hcl (match: github_<org>_<depName>_version = <version>) via GitHub Releases",
+            "fileMatch": [
+                "^variables\\..+\\.pkrvars\\.hcl$"
+            ],
+            "matchStrings": [
+                "github_(?<org>[a-zA-Z0-9_]+)_(?<depName>[a-zA-Z0-9_]+)_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+            ],
+            "datasourceTemplate": "github-releases",
+            "depNameTemplate": "{{org}}/{{depName}}",
+            "extractVersionTemplate": "^v?(?<version>.*)$"
+        },
+        {
+            "customType": "regex",
+            "description": "Update tool versions in variables.*.pkrvars.hcl (match: docker_<group>_<image>_version = <depName>:<version>) via Docker Hub",
+            "fileMatch": [
+                "^variables\\..+\\.pkrvars\\.hcl$"
+            ],
+            "matchStrings": [
+                "docker_[a-zA-Z0-9_]+_version\\s*=\\s*\"(?<depName>[^:]+):(?<currentValue>[^\"]+)\""
+            ],
+            "datasourceTemplate": "docker"
+        }
+    ]
