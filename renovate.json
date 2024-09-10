@@ -1,4 +1,5 @@
-"customManagers": [
+{
+        "customManagers": [
         {
             "customType": "regex",
             "description": "Update tool versions in variables.*.pkrvars.hcl (match: github_<org>_<depName>_version = <version>) via GitHub Releases",
@@ -24,3 +25,4 @@
             "datasourceTemplate": "docker"
         }
     ]
+}
